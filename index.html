@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WP Engine + Glean | Unified AI Layer Infographic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      /* Brand-inspired palette */
+      --wp-navy: #001e3c;
+      --wp-navy-soft: #022c43;
+      --wp-teal: #00c0e4;
+      --wp-teal-soft: rgba(0, 192, 228, 0.12);
+      --glean-indigo: #4f46e5;
+
+      --bg: #f3f7fb;
+      --bg-alt: #ffffff;
+      --text-main: #0b1120;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border-subtle: #d0d7e2;
+      --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.12);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 20px 56px;
+    }
+
+    /* Brand bar */
+    .brand-bar {
+      background: linear-gradient(90deg, var(--wp-navy), var(--wp-navy-soft));
+      border-radius: 18px;
+      padding: 14px 18px;
+      color: #e5f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.4);
+      margin-bottom: 32px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .brand-logos {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 14px;
+      border-right: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .brand-logo-wp {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-logo-text {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #e5f0ff;
+    }
+
+    .brand-logo-text span {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .brand-divider-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, var(--wp-teal));
+      box-shadow: 0 0 10px rgba(0, 192, 228, 0.9);
+    }
+
+    .brand-right {
+      text-align: right;
+      font-size: 12px;
+      color: #cbd5f5;
+      max-width: 260px;
+    }
+
+    .brand-right-strapline {
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .brand-right-sub {
+      margin-top: 2px;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 720px) {
+      .brand-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .brand-right {
+        text-align: left;
+        max-width: none;
+      }
+      .brand-logos {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, var(--wp-teal));
+      box-shadow: 0 0 10px rgba(0, 192, 228, 0.9);
+    }
+
+    .headline {
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 840px) {
+      .headline {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .headline-title {
+      font-size: clamp(30px, 3.6vw, 38px);
+      font-weight: 650;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      margin: 14px 0 8px;
+      color: var(--wp-navy);
+    }
+
+    .headline-highlight {
+      background: linear-gradient(120deg, var(--glean-indigo), var(--wp-teal));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .headline-subtitle {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 540px;
+    }
+
+    .headline-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      max-width: 420px;
+    }
+
+    .metric-pill {
+      border-radius: var(--radius-pill);
+      padding: 8px 14px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 12px rgba(15, 23, 42, 0.05);
+    }
+
+    .metric-label {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .metric-value {
+      font-weight: 600;
+      color: var(--wp-navy);
+      font-size: 12px;
+    }
+
+    .headline-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .headline-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.55;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(0, 192, 228, 0.18), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(79, 70, 229, 0.16), transparent 55%);
+      pointer-events: none;
+    }
+
+    .headline-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .headline-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wp-navy);
+      margin-bottom: 8px;
+    }
+
+    .headline-card-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+
+    .headline-card-body strong {
+      color: var(--wp-navy);
+      font-weight: 600;
+    }
+
+    /* Section shell */
+    section {
+      margin-top: 26px;
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wp-navy);
+    }
+
+    .section-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    /* Collapsible cards */
+    details {
+      background: #f8fafc;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      padding: 10px 13px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.18s ease, box-shadow 0.18s ease,
+        border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    details:hover {
+      border-color: var(--wp-teal);
+      background: #eff6ff;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+      transform: translateY(-1px);
+    }
+
+    details[open] {
+      background: #ffffff;
+      border-color: var(--wp-teal);
+    }
+
+    summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wp-navy);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--wp-navy);
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      white-space: nowrap;
+    }
+
+    .summary-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wp-navy);
+      white-space: nowrap;
+    }
+
+    .summary-sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    @media (min-width: 760px) {
+      .summary-sub {
+        display: inline;
+      }
+    }
+
+    .chevron {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #e2e8f0);
+      transition: transform 0.18s ease, border-color 0.18s ease,
+        color 0.18s ease;
+    }
+
+    details[open] .chevron {
+      transform: rotate(90deg);
+      border-color: var(--wp-teal);
+      color: var(--wp-navy);
+    }
+
+    .details-body {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .details-body ul {
+      padding-left: 18px;
+      margin: 4px 0 0;
+    }
+
+    .details-body li {
+      margin: 3px 0;
+    }
+
+    .details-body strong {
+      color: var(--wp-navy);
+      font-weight: 600;
+    }
+
+    /* Closing */
+    .closing {
+      text-align: left;
+      padding: 18px 20px;
+      background: linear-gradient(120deg, var(--wp-navy), var(--glean-indigo));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(15, 23, 42, 0.8);
+      margin-top: 30px;
+      color: #e5f0ff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .closing::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.45;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(0, 192, 228, 0.32), transparent 55%),
+        radial-gradient(circle at 90% 0%, rgba(129, 140, 248, 0.32), transparent 55%);
+      pointer-events: none;
+    }
+
+    .closing-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .closing-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #e0f2fe;
+      margin-bottom: 6px;
+    }
+
+    .closing-body {
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 800px;
+    }
+
+    .closing-body strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- Branded header -->
+    <div class="brand-bar">
+      <div class="brand-left">
+        <div class="brand-logos">
+          <!-- WP Engine logo from uploaded asset -->
+          <img
+            src="https://scio-prod-be.glean.com/api/v1/downloadchatfile/f451a7d6daaf4879bd4a9417cb9db4c4"
+            alt="WP Engine logo"
+            class="brand-logo-wp"
+          />
+          <div class="brand-logo-text">
+            <span>WP Engine</span> &times; Glean
+          </div>
+        </div>
+        <div class="brand-divider-dot"></div>
+        <div class="brand-logo-text">
+          Unified AI layer for strategy, work, and execution
+        </div>
+      </div>
+      <div class="brand-right">
+        <div class="brand-right-strapline">
+          Managed Hosting &amp; AI, Better Together
+        </div>
+        <div class="brand-right-sub">
+          Glean brings governed, cross‑system AI to the WP Engine platform teams and
+          the business.
+        </div>
+      </div>
+    </div>
+
+    <!-- Headline section -->
+    <header class="headline">
+      <div>
+        <span class="pill-tag">
+          <span class="pill-dot"></span>
+          WP Engine + Glean
+        </span>
+        <h1 class="headline-title">
+          A governed AI layer that
+          <span class="headline-highlight">connects strategy, work, and execution</span>
+          across WP Engine.
+        </h1>
+        <p class="headline-subtitle">
+          WP Engine is modernizing core systems, consolidating work across fragmented tools,
+          and needs a single, permission‑aware AI layer that turns context spread across Jira,
+          Confluence, G&nbsp;Suite, Salesforce, support systems, and more into trusted answers
+          and automations.
+        </p>
+
+        <div class="headline-metrics">
+          <div class="metric-pill">
+            <span class="metric-label">Systems</span>
+            <span class="metric-value">From silos → one pane of glass</span>
+          </div>
+          <div class="metric-pill">
+            <span class="metric-label">Teams</span>
+            <span class="metric-value">Every department, one Assistant</span>
+          </div>
+          <div class="metric-pill">
+            <span class="metric-label">Risk</span>
+            <span class="metric-value">Native permissions, governed AI</span>
+          </div>
+          <div class="metric-pill">
+            <span class="metric-label">Scale</span>
+            <span class="metric-value">From point tools → platform</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="headline-card">
+        <div class="headline-card-inner">
+          <div class="headline-card-title">
+            Why Glean is different from existing AI tools at WP Engine
+          </div>
+          <div class="headline-card-body">
+            Today, tools like Gemini and Embrace are helpful but
+            <strong>lack true cross‑system enterprise context</strong> across Jira, Salesforce,
+            and other core systems, and they do not span all of engineering or business workflows.
+            Glean sits on top of the systems WP Engine already depends on,
+            <strong>mirrors native permissions</strong>, and delivers a unified search,
+            Assistant, and governed agent platform that
+            <strong>drives measurable impact in every department</strong>.
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <!-- Differentiators section -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">Glean Differentiators</h2>
+        <p class="section-tagline">
+          Click to fold down each differentiator and see how it drives impact for WP Engine.
+        </p>
+      </div>
+
+      <div class="section-grid">
+        <!-- Differentiator 1 -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Differentiator</span>
+              <span class="summary-title">Ecosystem of Connectors</span>
+              <span class="summary-sub">Native, permission‑aware integrations across WP Engine’s stack</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                <strong>Native permission‑aware connectors</strong> for many of WP Engine’s systems:
+                G&nbsp;Suite, Jira, Asana, Confluence, Guru, Tableau, Looker, Salesforce,
+                Highspot, WP, NetSuite, Gainsight, Zendesk.
+              </li>
+              <li>
+                <strong>Drives value in every department</strong> with cross‑functional use cases that
+                combine information from disparate sources, instead of locking AI to a single tool.
+              </li>
+              <li>
+                Goes beyond simple federated search: Glean uses <strong>enterprise context and relevance</strong>
+                to reduce hallucinations and prevent improper exposure of data across systems.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Differentiator 2 -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Differentiator</span>
+              <span class="summary-title">Access to Industry‑Wide Model Innovation</span>
+              <span class="summary-sub">Model‑agnostic with secure access to frontier LLMs</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                <strong>Model‑agnostic platform</strong> with 0‑day retention and no‑training agreements
+                with providers like OpenAI, Anthropic, Google, and Amazon.
+              </li>
+              <li>
+                WP Engine gets <strong>secure access to frontier models</strong> within Glean as soon
+                as they launch—without ripping and replacing platforms.
+              </li>
+              <li>
+                Avoids betting the whole strategy on a single LLM vendor and reduces re‑platform risk
+                as the landscape evolves.
+              </li>
+              <li>
+                Per‑chat and per‑workflow flexibility to <strong>optimize for quality, cost, speed,
+                security, and use case</strong> across the Assistant and agents.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Differentiator 3 -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Differentiator</span>
+              <span class="summary-title">Governed Low‑Code / No‑Code Agents</span>
+              <span class="summary-sub">Agent platform built for scale, not sprawl</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                <strong>No‑code / low‑code agent builder</strong> lets teams create agents
+                conversationally or visually, without heavy custom engineering.
+              </li>
+              <li>
+                <strong>Central governance</strong>: admins define who can build, approve, and share
+                agents, which tools and data they can access, and how they’re monitored and logged.
+              </li>
+              <li>
+                Enables WP Engine to <strong>scale automation across departments</strong> without
+                a parallel sprawl of unmanaged bots, prompts, and point solutions.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Differentiator 4 -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Differentiator</span>
+              <span class="summary-title">Enterprise Scale &amp; Security Built‑In</span>
+              <span class="summary-sub">Permission mirroring, encryption, and unified guardrails</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                <strong>Strict permission mirroring, encryption, and enterprise controls</strong>
+                ensure Glean never accesses more than an end user is already allowed to see in
+                source systems.
+              </li>
+              <li>
+                The same <strong>governance layer, policies, guardrails, and audit controls</strong>
+                apply to search, Assistant, and Agents across the platform.
+              </li>
+              <li>
+                As AI scales, WP Engine has <strong>one place to manage permissions, guardrails,
+                runtime risk, and sensitive‑content protection</strong>.
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Departments / use cases section -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">Department &amp; Use‑Case Coverage</h2>
+        <p class="section-tagline">
+          Fold down each department to see concrete, high‑impact use cases for WP Engine.
+        </p>
+      </div>
+
+      <div class="section-grid">
+        <!-- Enterprise Services / Enterprise Systems -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Department</span>
+              <span class="summary-title">Enterprise Services / Enterprise Systems</span>
+              <span class="summary-sub">Cross‑system “pane of glass” for change and execution</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                Create a true <strong>cross‑system and cross‑functional “pane of glass”</strong> across
+                strategic initiatives, projects, and work.
+              </li>
+              <li>
+                <strong>Map strategic initiative → project → task</strong> and delineate RTB / KTLO
+                vs. transformative work.
+              </li>
+              <li>
+                Run <strong>stakeholder mapping and change‑impact analysis</strong> before major
+                system changes.
+              </li>
+              <li>
+                <strong>Reduce missed dependencies</strong> across finance, billing, GTM, and
+                engineering.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Engineering -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Department</span>
+              <span class="summary-title">Engineering</span>
+              <span class="summary-sub">Faster answers, onboarding, and SDLC acceleration</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                Provide <strong>cross‑system answers</strong> across Jira, Confluence, G&nbsp;Drive,
+                data platforms, and documentation in one place.
+              </li>
+              <li>
+                <strong>Accelerate onboarding</strong> into projects, systems, and historical
+                decisions with AI that understands prior work.
+              </li>
+              <li>
+                <strong>Speed up the SDLC</strong> with automations for documentation, code review,
+                and release notes—steeped in enterprise context and <strong>native inside current
+                dev tools</strong>.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Customer Success -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Department</span>
+              <span class="summary-title">Customer Success</span>
+              <span class="summary-sub">Account‑level context in a single view</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                Give CSMs <strong>full account history in one place</strong> across Salesforce,
+                Gainsight, support tickets, and internal / external docs, notes, chats, and emails.
+              </li>
+              <li>
+                Help CSMs show up more consistently as <strong>strategic partners</strong> even
+                with heavy books of business.
+              </li>
+              <li>
+                Drive <strong>lower churn, stronger renewals, and more upsells</strong> by putting
+                the right context at their fingertips.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Support -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Department</span>
+              <span class="summary-title">Support</span>
+              <span class="summary-sub">Single AI Assistant across customers, tickets, and knowledge</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                Provide a <strong>single AI Assistant</strong> for answers connected across systems,
+                customer / account context, prior tickets, product docs, and internal knowledge bases.
+              </li>
+              <li>
+                Surface the <strong>full story behind a case</strong> so agents respond with context,
+                consistency, and speed.
+              </li>
+              <li>
+                Drive <strong>lower MTTR, higher first‑contact resolution, faster rep ramp,
+                better customer experience, and fewer escalations</strong>.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Sales -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Department</span>
+              <span class="summary-title">Sales</span>
+              <span class="summary-sub">Deal prep, product answers, and process in one place</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                Enable sellers to quickly access <strong>deal prep and product answers</strong> across
+                dozens of disparate systems that currently take hours to navigate.
+              </li>
+              <li>
+                Help early‑career reps show up <strong>like seasoned pros</strong> with the right
+                context and credibility in complex, changing environments.
+              </li>
+              <li>
+                Drive <strong>faster rep ramp, consistent process adherence, higher productivity
+                per rep, and greater sales velocity</strong>.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Legal -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Department</span>
+              <span class="summary-title">Legal</span>
+              <span class="summary-sub">Faster, more defensible decisions with full matter context</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                Provide fast, permission‑aware access to the <strong>right contracts, communications,
+                filings, and prior decisions</strong> across systems.
+              </li>
+              <li>
+                Ground reviews in <strong>prior language, playbooks, approvals, and MSA deviation
+                patterns</strong> for more consistent and defensible responses.
+              </li>
+              <li>
+                Help Legal <strong>coordinate tightly with leadership and other departments</strong>
+                on high‑stakes matters, turning decisions around faster while reducing risk and
+                outside counsel spend.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Other departments -->
+        <details>
+          <summary>
+            <div class="summary-main">
+              <span class="summary-label">Department</span>
+              <span class="summary-title">Use Cases Across Every Department</span>
+              <span class="summary-sub">Extending AI beyond technical teams</span>
+            </div>
+            <span class="chevron">›</span>
+          </summary>
+          <div class="details-body">
+            <ul>
+              <li>
+                <strong>Marketing</strong>: campaign knowledge management, content generation,
+                and event execution support.
+              </li>
+              <li>
+                <strong>Finance</strong>: faster reporting, planning support, and operational analysis
+                grounded in current data.
+              </li>
+              <li>
+                <strong>HR / People</strong>: policy Q&amp;A, onboarding flows, and employee support
+                through a single, trusted Assistant.
+              </li>
+              <li>
+                <strong>Security</strong>: incident response assistance, post‑mortems, and faster
+                creation of security documentation.
+              </li>
+              <li>
+                <strong>Operations / Procurement</strong>: supplier onboarding, supplier management,
+                and SLA support with full cross‑system context.
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Closing statement -->
+    <section class="closing">
+      <div class="closing-inner">
+        <div class="closing-title">Closing</div>
+        <div class="closing-body">
+          WP Engine does not need more narrow AI point solutions. It needs a
+          <strong>governed, permission‑aware layer</strong> that connects the systems you already
+          depend on, helps leaders see <strong>cross‑business context</strong>, and gives frontline
+          teams one trusted place for answers and workflows derived from dozens of tools.
+          Glean is designed to be that layer—so WP Engine can modernize faster, ship with confidence,
+          and scale AI impact across every department without compromising security or governance.
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
