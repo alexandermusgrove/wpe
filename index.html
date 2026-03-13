@@ -187,40 +187,6 @@
       max-width: 540px;
     }
 
-    .headline-metrics {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 16px;
-      max-width: 420px;
-    }
-
-    .metric-pill {
-      border-radius: var(--radius-pill);
-      padding: 8px 14px;
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 6px 12px rgba(15, 23, 42, 0.05);
-    }
-
-    .metric-label {
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 500;
-    }
-
-    .metric-value {
-      font-weight: 600;
-      color: var(--wp-navy);
-      font-size: 12px;
-    }
-
     .headline-card {
       background: #ffffff;
       border-radius: var(--radius-lg);
@@ -262,11 +228,6 @@
       color: var(--text-main);
     }
 
-    .headline-card-body strong {
-      color: var(--wp-navy);
-      font-weight: 600;
-    }
-
     /* Section shell */
     section {
       margin-top: 26px;
@@ -302,6 +263,17 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 14px;
+    }
+
+    /* 2x2 layout for differentiators on larger screens */
+    .diff-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 720px) {
+      .diff-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     /* Collapsible cards */
@@ -526,25 +498,6 @@
           Confluence, G&nbsp;Suite, Salesforce, support systems, and more into trusted answers
           and automations.
         </p>
-
-        <div class="headline-metrics">
-          <div class="metric-pill">
-            <span class="metric-label">Systems</span>
-            <span class="metric-value">From silos → one pane of glass</span>
-          </div>
-          <div class="metric-pill">
-            <span class="metric-label">Teams</span>
-            <span class="metric-value">Every department, one Assistant</span>
-          </div>
-          <div class="metric-pill">
-            <span class="metric-label">Risk</span>
-            <span class="metric-value">Native permissions, governed AI</span>
-          </div>
-          <div class="metric-pill">
-            <span class="metric-label">Scale</span>
-            <span class="metric-value">From point tools → platform</span>
-          </div>
-        </div>
       </div>
 
       <aside class="headline-card">
@@ -556,9 +509,9 @@
             Today, tools like Gemini and Embrace are helpful but stop at their own data.
             They don’t bring together Jira, Salesforce, support, and product systems into one
             trusted layer, and they don’t span full engineering and business workflows.
-            Glean sits on top of the systems WP Engine already depends on, <strong>mirrors native
-            permissions</strong>, and delivers a unified search, Assistant, and governed agent
-            platform that <strong>drives measurable impact in every department</strong>.
+            Glean sits on top of the systems WP Engine already depends on, mirrors native
+            permissions, and delivers a unified search, Assistant, and governed agent platform
+            that drives measurable impact in every department.
           </div>
         </div>
       </aside>
@@ -573,7 +526,7 @@
         </p>
       </div>
 
-      <div class="section-grid">
+      <div class="section-grid diff-grid">
         <!-- Differentiator 1 -->
         <details>
           <summary>
